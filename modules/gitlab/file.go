@@ -19,7 +19,7 @@ type File struct {
 // UploadFile uploads file to gitlab project
 //
 // Gitlab API docs: http://docs.gitlab.com/ee/api/projects.html#upload-a-file
-func (g *GitlabContext) UploadFile(projectID, name string, file io.Reader) (*File, error) {
+func (g *Client) UploadFile(projectID, name string, file io.Reader) (*File, error) {
 	path := getUrl([]string{"projects", projectID, "uploads"})
 
 	body := new(bytes.Buffer)
