@@ -5,11 +5,10 @@ CWD   = /go/src/gitlab.com/leanlabsio/kanban
 all: clean
 
 test:
-	@docker run -d -P --name selenium-hub selenium/hub:2.47.1
-	@docker run -d --link selenium-hub:hub selenium/node-chrome:2.47.1
-	@docker run -d --link selenium-hub:hub selenium/node-firefox:2.47.1
-	@docker run -d -P $(IMAGE):$(TAG)
-	@protractor $(CURDIR)/tests/e2e.conf.js
+	docker run --rm \
+		-v $(CURDIR):$(CWD) \
+		-w $(CWD) \
+		golang:1.8-alpine go test -v $$(go list ./... | grep -v '/vendor/')
 
 node_modules/: package.json
 	@docker run --rm \

@@ -34,7 +34,7 @@ type LabelDeleteOptions struct {
 // ListLabels gets all labels for given project.
 //
 // GitLab API docs: http://doc.gitlab.com/ce/api/labels.html#list-labels
-func (g *GitlabContext) ListLabels(project_id string, o *ListOptions) ([]*Label, error) {
+func (g *Client) ListLabels(project_id string, o *ListOptions) ([]*Label, error) {
 	path := getUrl([]string{"projects", url.QueryEscape(project_id), "labels"})
 	u, err := addOptions(path, o)
 	if err != nil {
@@ -54,7 +54,7 @@ func (g *GitlabContext) ListLabels(project_id string, o *ListOptions) ([]*Label,
 // CreateIssue creates a new project issue.
 //
 // GitLab API docs: http://doc.gitlab.com/ce/api/issues.html#new-issues
-func (g *GitlabContext) CreateLabel(project_id string, label *LabelRequest) (*Label, *http.Response, error) {
+func (g *Client) CreateLabel(project_id string, label *LabelRequest) (*Label, *http.Response, error) {
 	path := []string{"projects", url.QueryEscape(project_id), "labels"}
 	req, _ := g.NewRequest("POST", path, label)
 
@@ -69,7 +69,7 @@ func (g *GitlabContext) CreateLabel(project_id string, label *LabelRequest) (*La
 // EditLabel updates an existing project labels
 //
 // GitLab API docs: http://doc.gitlab.com/ce/api/labels.html#edit-an-existing-label
-func (g *GitlabContext) EditLabel(project_id string, label *LabelRequest) (*Label, *http.Response, error) {
+func (g *Client) EditLabel(project_id string, label *LabelRequest) (*Label, *http.Response, error) {
 	path := []string{"projects", url.QueryEscape(project_id), "labels"}
 	req, _ := g.NewRequest("PUT", path, label)
 
@@ -84,7 +84,7 @@ func (g *GitlabContext) EditLabel(project_id string, label *LabelRequest) (*Labe
 //DeleteLabel deletes an existing project label
 //
 // GitLab API docs: http://doc.gitlab.com/ce/api/labels.html#delete-a-label
-func (g *GitlabContext) DeleteLabel(project_id string, label *LabelRequest) (*Label, *http.Response, error) {
+func (g *Client) DeleteLabel(project_id string, label *LabelRequest) (*Label, *http.Response, error) {
 	o := &LabelDeleteOptions{Name: label.Name}
 	path := []string{"projects", url.QueryEscape(project_id), "labels"}
 

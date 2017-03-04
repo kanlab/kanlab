@@ -31,7 +31,7 @@ type MilestoneRequest struct {
 // ListMilestones returns a list of project milestones.
 //
 // GitLab API docs: http://doc.gitlab.com/ce/api/milestones.html#list-project-milestones
-func (g *GitlabContext) ListMilestones(project_id string, o *ListOptions) ([]*Milestone, error) {
+func (g *Client) ListMilestones(project_id string, o *ListOptions) ([]*Milestone, error) {
 	path := getUrl([]string{"projects", url.QueryEscape(project_id), "milestones"})
 	u, err := addOptions(path, o)
 	if err != nil {
@@ -51,7 +51,7 @@ func (g *GitlabContext) ListMilestones(project_id string, o *ListOptions) ([]*Mi
 // CreateMilestone creates a new project milestone.
 //
 // GitLab API docs: http://doc.gitlab.com/ce/api/milestones.html#create-new-milestone
-func (g *GitlabContext) CreateMilestone(project_id string, m *MilestoneRequest) (*Milestone, *http.Response, error) {
+func (g *Client) CreateMilestone(project_id string, m *MilestoneRequest) (*Milestone, *http.Response, error) {
 	path := []string{"projects", url.QueryEscape(project_id), "milestones"}
 	req, _ := g.NewRequest("POST", path, m)
 
@@ -66,7 +66,7 @@ func (g *GitlabContext) CreateMilestone(project_id string, m *MilestoneRequest) 
 // UpdateMilestone updates a project milestone.
 //
 // GitLab API docs: http://doc.gitlab.com/ce/api/milestones.html#edit-milestone
-func (g *GitlabContext) UpdateMilestone(project_id string, m_id string, m *MilestoneRequest) (*Milestone, *http.Response, error) {
+func (g *Client) UpdateMilestone(project_id string, m_id string, m *MilestoneRequest) (*Milestone, *http.Response, error) {
 	path := []string{"projects", url.QueryEscape(project_id), "milestones", m_id}
 	req, _ := g.NewRequest("PUT", path, m)
 

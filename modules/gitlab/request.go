@@ -25,7 +25,7 @@ func (r ResponseError) Error() string {
 
 // Do sends an HTTP request and returns an HTTP response, following
 // policy (e.g. redirects, cookies, auth) as configured on the client.
-func (g *GitlabContext) Do(req *http.Request, v interface{}) (*http.Response, error) {
+func (g *Client) Do(req *http.Request, v interface{}) (*http.Response, error) {
 	res, err := g.client.Do(req)
 
 	if err != nil {
@@ -74,7 +74,7 @@ func CheckResponse(r *http.Response) error {
 // Relative URLs should always be specified without a preceding slash.  If
 // specified, the value pointed to by body is JSON encoded and included as the
 // request body.
-func (c *GitlabContext) NewRequest(method string, urlStr []string, body interface{}) (*http.Request, error) {
+func (c *Client) NewRequest(method string, urlStr []string, body interface{}) (*http.Request, error) {
 	u := getUrl(urlStr)
 
 	var buf io.ReadWriter

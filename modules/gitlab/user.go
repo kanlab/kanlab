@@ -22,7 +22,7 @@ type User struct {
 //
 // GitLab API docs:
 // http://doc.gitlab.com/ce/api/projects.html#list-project-team-members
-func (g *GitlabContext) ListProjectMembers(project_id string, o *ListOptions) ([]*User, error) {
+func (g *Client) ListProjectMembers(project_id string, o *ListOptions) ([]*User, error) {
 	path := getUrl([]string{"projects", url.QueryEscape(project_id), "members"})
 	u, err := addOptions(path, o)
 	if err != nil {
@@ -43,7 +43,7 @@ func (g *GitlabContext) ListProjectMembers(project_id string, o *ListOptions) ([
 //
 // GitLab API docs:
 // http://doc.gitlab.com/ce/api/groups.html#list-group-members
-func (g *GitlabContext) ListGroupMembers(group_id string, o *ListOptions) ([]*User, error)  {
+func (g *Client) ListGroupMembers(group_id string, o *ListOptions) ([]*User, error)  {
 	path := getUrl([]string{"groups", group_id, "members"})
 	u, err := addOptions(path, o)
 	if err != nil {
@@ -63,7 +63,7 @@ func (g *GitlabContext) ListGroupMembers(group_id string, o *ListOptions) ([]*Us
 // CurrentUser gets currently authenticated user.
 //
 // GitLab API docs: http://doc.gitlab.com/ce/api/users.html#current-user
-func (g *GitlabContext) CurrentUser() (*User, error) {
+func (g *Client) CurrentUser() (*User, error) {
 	path := getUrl([]string{"user"})
 	req, _ := http.NewRequest("GET", path, nil)
 
