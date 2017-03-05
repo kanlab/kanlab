@@ -2,6 +2,10 @@ REGISTRY_HOST = registry.gitlab.com
 IMAGE = leanlabs/kanban
 TAG   = 1.7.1
 CWD   = /go/src/gitlab.com/leanlabsio/kanban
+PACKAGES := `docker run --rm \
+				-v $(CURDIR):$(CWD) \
+				-w $(CWD) \
+				golang:1.8-alpine go list ./... | grep -v '/vendor/'`
 
 all: clean
 
@@ -9,7 +13,7 @@ test: rel/kanban_x86_64_linux
 	@docker run --rm \
 		-v $(CURDIR):$(CWD) \
 		-w $(CWD) \
-		golang:1.8-alpine go test $$(go list ./... | grep -v '/vendor/')
+		golang:1.8-alpine go test $(PACKAGES)
 
 node_modules/: package.json
 	@docker run --rm \
