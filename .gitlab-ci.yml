@@ -7,8 +7,15 @@ services:
   - docker:dind
 
 stages:
-  - build_image
   - test
+  - build_image
+
+test:
+  stage: test
+  tags:
+    - docker
+  script:
+    - make test
 
 build_image:
   stage: build_image
@@ -17,11 +24,4 @@ build_image:
   tags:
     - docker
   script:
-    - make build_image
-
-test:
-  stage: test
-  tags:
-    - docker
-  script:
-    - make test
+    - make build_image TAG=${CI_BUILD_REF:0:12}
