@@ -4,7 +4,7 @@ CWD   = /go/src/gitlab.com/leanlabsio/kanban
 
 all: clean
 
-test:
+test: rel/kanban_x86_64_linux
 	@docker run --rm \
 		-v $(CURDIR):$(CWD) \
 		-w $(CWD) \
@@ -25,10 +25,6 @@ build: node_modules/
 		-w $(CWD) \
 		-e HOME=/cache \
 		node:6.3.0-wheezy npm run build
-
-build_image: rel/kanban_x86_64_linux
-	@docker build -t $(IMAGE) .
-	@docker tag $(IMAGE):latest $(IMAGE):$(TAG)
 
 templates/templates.go: $(find $(CURDIR)/templates -name "*.html" -type f)
 	@docker run --rm \
@@ -70,7 +66,9 @@ rel/kanban_x86_64_darwin: clean build templates/templates.go web/web.go $(find $
 		--entrypoint=/usr/local/go/bin/go \
 		golang:1.8.0 build -ldflags "-X main.AppVer=$(TAG) -s" -v -o $@
 
-release: build_docker
+release: rel/kanban_x86_64_linux
+	@docker build -t $(IMAGE) .
+	@docker tag $(IMAGE):latest $(IMAGE):$(TAG)
 	@docker push $(IMAGE):latest
 	@docker push $(IMAGE):$(TAG)
 

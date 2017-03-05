@@ -7,21 +7,13 @@ services:
   - docker:dind
 
 stages:
-  - test
-  - build_image
+  - build
 
-test:
-  stage: test
-  tags:
-    - docker
-  script:
-    - make test
-
-build_image:
-  stage: build_image
+build:
+  stage: build
   after_script:
-    - make clean
+      - make clean
   tags:
     - docker
   script:
-    - make build_image TAG=${CI_BUILD_REF:0:12}
+    - make test release IMAGE=registry.gitlab.com/leanlabs/kanban TAG=${CI_BUILD_REF:0:12} REGISTRY_USERNAME=gitlab-ci-token REGISTRY_PASSWORD=$CI_BUILD_TOKEN
