@@ -16,4 +16,4 @@ build:
   tags:
     - docker
   script:
-    - make test release IMAGE=registry.gitlab.com/leanlabs/kanban TAG=${CI_BUILD_REF:0:12} REGISTRY_USERNAME=gitlab-ci-token REGISTRY_PASSWORD=$CI_BUILD_TOKEN
+    - make test release IMAGE=registry.gitlab.com/leanlabsio/kanban TAG=${CI_BUILD_REF:0:12} REGISTRY_USERNAME=gitlab-ci-token REGISTRY_PASSWORD=$CI_BUILD_TOKEN
