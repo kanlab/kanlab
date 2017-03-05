@@ -5,10 +5,10 @@ CWD   = /go/src/gitlab.com/leanlabsio/kanban
 all: clean
 
 test:
-	docker run --rm \
+	@docker run --rm \
 		-v $(CURDIR):$(CWD) \
 		-w $(CWD) \
-		golang:1.8-alpine go test -v $$(go list ./... | grep -v '/vendor/')
+		golang:1.8-alpine go test $$(go list ./... | grep -v '/vendor/')
 
 node_modules/: package.json
 	@docker run --rm \

@@ -5,10 +5,9 @@ import (
 	"net/url"
 	"strings"
 
-	"gopkg.in/redis.v3"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"gopkg.in/redis.v3"
 )
 
 // NewContext created new context for settings
@@ -92,10 +91,10 @@ func NewDbClient() *redis.Client {
 		DB:       int64(viper.GetInt("redis.db")),
 	}
 
-	url, _ := url.Parse(viper.GetString("redis.addr"))
+	u, _ := url.Parse(viper.GetString("redis.addr"))
 
-	if url.Scheme == "unix" {
-		opts.Addr = url.Path
+	if u.Scheme == "unix" {
+		opts.Addr = u.Path
 		opts.Network = "unix"
 	}
 
