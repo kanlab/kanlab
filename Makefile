@@ -1,3 +1,4 @@
+REGISTRY_HOST = registry.gitlab.com
 IMAGE = leanlabs/kanban
 TAG   = 1.7.1
 CWD   = /go/src/gitlab.com/leanlabsio/kanban
@@ -66,7 +67,10 @@ rel/kanban_x86_64_darwin: clean build templates/templates.go web/web.go $(find $
 		--entrypoint=/usr/local/go/bin/go \
 		golang:1.8.0 build -ldflags "-X main.AppVer=$(TAG) -s" -v -o $@
 
-release: rel/kanban_x86_64_linux
+login:
+	@docker login -u $(REGISTRY_USERNAME) -p $(REGISTRY_PASSWORD) $(REGISTRY_HOST)
+
+release: login rel/kanban_x86_64_linux
 	@docker build -t $(IMAGE) .
 	@docker tag $(IMAGE):latest $(IMAGE):$(TAG)
 	@docker push $(IMAGE):latest
