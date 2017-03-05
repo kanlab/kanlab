@@ -1,0 +1,27 @@
+image: cnam/make-builder:latest
+
+variables:
+  DOCKER_DRIVER: overlay
+
+services:
+  - docker:dind
+
+stages:
+  - build_image
+  - test
+
+build_image:
+  stage: build_image
+  after_script:
+    - make clean
+  tags:
+    - docker
+  script:
+    - make build_image
+
+test:
+  stage: test
+  tags:
+    - docker
+  script:
+    - make test

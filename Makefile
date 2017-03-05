@@ -26,6 +26,10 @@ build: node_modules/
 		-e HOME=/cache \
 		node:6.3.0-wheezy npm run build
 
+build_image: rel/kanban_x86_64_linux
+	@docker build -t $(IMAGE) .
+	@docker tag $(IMAGE):latest $(IMAGE):$(TAG)
+
 templates/templates.go: $(find $(CURDIR)/templates -name "*.html" -type f)
 	@docker run --rm \
 		-v $(CURDIR):$(CWD) \
@@ -66,15 +70,25 @@ rel/kanban_x86_64_darwin: clean build templates/templates.go web/web.go $(find $
 		--entrypoint=/usr/local/go/bin/go \
 		golang:1.8.0 build -ldflags "-X main.AppVer=$(TAG) -s" -v -o $@
 
-release: rel/kanban_x86_64_linux
-	@docker build -t $(IMAGE) .
-	@docker tag $(IMAGE):latest $(IMAGE):$(TAG)
+release: build_docker
 	@docker push $(IMAGE):latest
 	@docker push $(IMAGE):$(TAG)
 
 clean:
-	@rm -rf web/
-	@rm -f templates/templates.go
+	@-docker run \
+	    -v $(CURDIR):$(CWD) \
+	    -w $(CWD) \
+		alpine:3.4 rm -rf web/
+
+	@-docker run \
+		-v $(CURDIR):$(CWD) \
+    	-w $(CWD) \
+    	alpine:3.4 rm -f templates/templates.go
+
+	@-docker run \
+		-v $(CURDIR):$(CWD) \
+		-w $(CWD) \
+		alpine:3.4 rm -rf rel node_modules
 
 # Development targets
 dev_redis:
