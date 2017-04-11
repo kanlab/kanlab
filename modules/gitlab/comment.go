@@ -37,7 +37,7 @@ type CommentRequest struct {
 //
 // GitLab API docs:
 // http://doc.gitlab.com/ce/api/notes.html#list-project-issue-notes
-func (g *GitlabContext) ListComments(project_id, issue_id string, o *ListOptions) ([]*Comment, error) {
+func (g *Client) ListComments(project_id, issue_id string, o *ListOptions) ([]*Comment, error) {
 	path := getUrl([]string{"projects", url.QueryEscape(project_id), "issues", issue_id, "notes"})
 	u, err := addOptions(path, o)
 	if err != nil {
@@ -76,7 +76,7 @@ func (p commentSlice) Swap(i, j int) {
 //
 // GitLab API docs:
 // http://doc.gitlab.com/ce/api/notes.html#create-new-issue-note
-func (g *GitlabContext) CreateComment(project_id, issue_id string, com *CommentRequest) (*Comment, *http.Response, error) {
+func (g *Client) CreateComment(project_id, issue_id string, com *CommentRequest) (*Comment, *http.Response, error) {
 	path := []string{"projects", url.QueryEscape(project_id), "issues", issue_id, "notes"}
 	req, _ := g.NewRequest("POST", path, com)
 

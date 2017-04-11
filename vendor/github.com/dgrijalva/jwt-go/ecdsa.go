@@ -4,6 +4,7 @@ import (
 	"crypto"
 	"crypto/ecdsa"
 	"crypto/rand"
+	"encoding/asn1"
 	"errors"
 	"math/big"
 )
@@ -15,10 +16,14 @@ var (
 
 // Implements the ECDSA family of signing methods signing methods
 type SigningMethodECDSA struct {
-	Name      string
-	Hash      crypto.Hash
-	KeySize   int
-	CurveBits int
+	Name string
+	Hash crypto.Hash
+}
+
+// Marshalling structure for r, s EC point
+type ECPoint struct {
+	R *big.Int
+	S *big.Int
 }
 
 // Specific instances for EC256 and company
@@ -30,19 +35,19 @@ var (
 
 func init() {
 	// ES256
-	SigningMethodES256 = &SigningMethodECDSA{"ES256", crypto.SHA256, 32, 256}
+	SigningMethodES256 = &SigningMethodECDSA{"ES256", crypto.SHA256}
 	RegisterSigningMethod(SigningMethodES256.Alg(), func() SigningMethod {
 		return SigningMethodES256
 	})
 
 	// ES384
-	SigningMethodES384 = &SigningMethodECDSA{"ES384", crypto.SHA384, 48, 384}
+	SigningMethodES384 = &SigningMethodECDSA{"ES384", crypto.SHA384}
 	RegisterSigningMethod(SigningMethodES384.Alg(), func() SigningMethod {
 		return SigningMethodES384
 	})
 
 	// ES512
-	SigningMethodES512 = &SigningMethodECDSA{"ES512", crypto.SHA512, 66, 521}
+	SigningMethodES512 = &SigningMethodECDSA{"ES512", crypto.SHA512}
 	RegisterSigningMethod(SigningMethodES512.Alg(), func() SigningMethod {
 		return SigningMethodES512
 	})
@@ -72,12 +77,11 @@ func (m *SigningMethodECDSA) Verify(signingString, signature string, key interfa
 		return ErrInvalidKey
 	}
 
-	if len(sig) != 2*m.KeySize {
-		return ErrECDSAVerification
+	// Unmarshal asn1 ECPoint
+	var ecpoint = new(ECPoint)
+	if _, err := asn1.Unmarshal(sig, ecpoint); err != nil {
+		return err
 	}
-
-	r := big.NewInt(0).SetBytes(sig[:m.KeySize])
-	s := big.NewInt(0).SetBytes(sig[m.KeySize:])
 
 	// Create hasher
 	if !m.Hash.Available() {
@@ -87,7 +91,7 @@ func (m *SigningMethodECDSA) Verify(signingString, signature string, key interfa
 	hasher.Write([]byte(signingString))
 
 	// Verify the signature
-	if verifystatus := ecdsa.Verify(ecdsaKey, hasher.Sum(nil), r, s); verifystatus == true {
+	if verifystatus := ecdsa.Verify(ecdsaKey, hasher.Sum(nil), ecpoint.R, ecpoint.S); verifystatus == true {
 		return nil
 	} else {
 		return ErrECDSAVerification
@@ -116,31 +120,16 @@ func (m *SigningMethodECDSA) Sign(signingString string, key interface{}) (string
 
 	// Sign the string and return r, s
 	if r, s, err := ecdsa.Sign(rand.Reader, ecdsaKey, hasher.Sum(nil)); err == nil {
-		curveBits := ecdsaKey.Curve.Params().BitSize
+		// asn1 marhsal r, s using ecPoint as the structure
+		var ecpoint = new(ECPoint)
+		ecpoint.R = r
+		ecpoint.S = s
 
-		if m.CurveBits != curveBits {
-			return "", ErrInvalidKey
+		if signature, err := asn1.Marshal(*ecpoint); err != nil {
+			return "", err
+		} else {
+			return EncodeSegment(signature), nil
 		}
-
-		keyBytes := curveBits / 8
-		if curveBits%8 > 0 {
-			keyBytes += 1
-		}
-
-		// We serialize the outpus (r and s) into big-endian byte arrays and pad
-		// them with zeros on the left to make sure the sizes work out. Both arrays
-		// must be keyBytes long, and the output must be 2*keyBytes long.
-		rBytes := r.Bytes()
-		rBytesPadded := make([]byte, keyBytes)
-		copy(rBytesPadded[keyBytes-len(rBytes):], rBytes)
-
-		sBytes := s.Bytes()
-		sBytesPadded := make([]byte, keyBytes)
-		copy(sBytesPadded[keyBytes-len(sBytes):], sBytes)
-
-		out := append(rBytesPadded, sBytesPadded...)
-
-		return EncodeSegment(out), nil
 	} else {
 		return "", err
 	}

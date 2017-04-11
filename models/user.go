@@ -6,12 +6,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
+	"time"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/spf13/viper"
 	"gitlab.com/leanlabsio/kanban/modules/gitlab"
 	"golang.org/x/oauth2"
-	"strings"
-	"time"
 )
 
 type User struct {
@@ -82,7 +83,7 @@ func LoadByToken(u *User, provider string) (*User, error) {
 	var user *User
 	switch provider {
 	case "gitlab":
-		c := gitlab.NewContext(u.Credential["gitlab"].Token, u.Credential["gitlab"].PrivateToken)
+		c := gitlab.NewClient(u.Credential["gitlab"].Token, u.Credential["gitlab"].PrivateToken)
 		r, err := c.CurrentUser()
 
 		if err != nil {
