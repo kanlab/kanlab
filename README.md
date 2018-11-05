@@ -39,7 +39,7 @@ make dev
 
 This way, you can apply changes to kanban board's source and run it directly using your custom settings.
 
-I hope everything works for you. For additional assistance you can visit the near-dead gitter channel linked below. I receive email notifications of this and will usually answer. Enjoy!
+I hope everything works for you. For additional assistance you can visit the near-dead gitter channel linked above. I receive email notifications of this and will usually answer. Enjoy!
 
 ---
 
