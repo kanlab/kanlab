@@ -3,6 +3,7 @@ package gitlab
 import (
 	"net/http"
 	"testing"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -31,7 +32,7 @@ func TestClient_ListProjectsSuccess(t *testing.T) {
 	pr, collOpt, err := c.ListProjects(&ProjectListOptions{})
 
 	assert.Nil(t, err)
-	assert.NotEmpty(t,pr)
+	assert.NotEmpty(t, pr)
 	assert.NotEmpty(t, collOpt)
 	assert.Equal(t, int64(1), (*pr[0]).Id)
 	assert.Equal(t, int64(2), (*pr[1]).Id)
@@ -57,9 +58,9 @@ func TestClient_ListProjectsRequestParams(t *testing.T) {
 
 	opt := &ProjectListOptions{
 		Archived: "false",
-		Search: "qwerty",
+		Search:   "qwerty",
 		ListOptions: ListOptions{
-			Page: "1",
+			Page:    "1",
 			PerPage: "1",
 		},
 	}
@@ -78,15 +79,14 @@ func TestClient_StarredProjectsSuccess(t *testing.T) {
 	c, teardown, _ := setup()
 	defer teardown()
 
-	mux.HandleFunc("/projects/starred", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/projects", func(w http.ResponseWriter, r *http.Request) {
 		w.Write(projectCollection)
 	})
-
 
 	pr, collOpt, err := c.StarredProjects(&ProjectListOptions{})
 
 	assert.Nil(t, err)
-	assert.NotEmpty(t,pr)
+	assert.NotEmpty(t, pr)
 	assert.NotEmpty(t, collOpt)
 	assert.Equal(t, int64(1), (*pr[0]).Id)
 	assert.Equal(t, int64(2), (*pr[1]).Id)
@@ -97,7 +97,7 @@ func TestClient_ListProjectsErr(t *testing.T) {
 	c, teardown, _ := setup()
 	defer teardown()
 
-	mux.HandleFunc("/projects/starred", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/projects", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(`{[}`))
 	})
 
@@ -113,18 +113,20 @@ func TestClient_StarredProjectsRequestCheck(t *testing.T) {
 
 	opt := &ProjectListOptions{
 		Archived: "false",
-		Search: "false",
+		Search:   "false",
+		Starred:  "true",
 		ListOptions: ListOptions{
-			Page: "1",
+			Page:    "1",
 			PerPage: "10",
 		},
 	}
 
-	mux.HandleFunc("/projects/starred", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/projects", func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, opt.Archived, r.URL.Query().Get("archived"))
 		assert.Equal(t, opt.Page, r.URL.Query().Get("page"))
 		assert.Equal(t, opt.PerPage, r.URL.Query().Get("per_page"))
 		assert.Equal(t, opt.Search, r.URL.Query().Get("search"))
+		assert.Equal(t, opt.Starred, r.URL.Query().Get("starred"))
 	})
 
 	c.StarredProjects(opt)
