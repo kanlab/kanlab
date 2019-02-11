@@ -45,6 +45,8 @@ type ProjectListOptions struct {
 	Archived string `url:"archived,omitempty"`
 	// Search find projects by criteria
 	Search string `url:"search,omitempty"`
+	// Starred if set to "true" return starred projects only
+	Starred string `url:"starred,omitempty"`
 
 	ListOptions
 }
@@ -73,7 +75,7 @@ func (g *Client) ListProjects(o *ProjectListOptions) ([]*Project, *CollectionOpt
 //
 // GitLab API docs: http://doc.gitlab.com/ce/api/projects.html#list-starred-projects
 func (g *Client) StarredProjects(opt *ProjectListOptions) ([]*Project, *CollectionOptions, error) {
-	u, err := addOptions(getUrl([]string{"projects/starred"}), opt)
+	u, err := addOptions(getUrl([]string{"projects"}), opt)
 	if err != nil {
 		return nil, nil, err
 	}
