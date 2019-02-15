@@ -57,6 +57,7 @@ Assuming you have installed [Docker](http://docs.docker.com/engine/installation/
 ### 1. Installation with Docker
 
 >~~` git clone https://gitlab.com/leanlabsio/kanban.git`~~
+>
 > `git clone https://github.com/leso-kn/kanban`
 >
 >` cd kanban`
