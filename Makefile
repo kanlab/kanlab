@@ -1,6 +1,6 @@
 REGISTRY_HOST = registry.gitlab.com
 IMAGE = leanlabs/kanban
-TAG   = 1.7.1
+TAG   = 1.7.2
 CWD   = /go/src/gitlab.com/leanlabsio/kanban
 PACKAGES := `docker run --rm \
 				-v $(CURDIR):$(CWD) \
