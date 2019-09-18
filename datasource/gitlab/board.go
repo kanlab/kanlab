@@ -45,6 +45,7 @@ func (ds GitLabDataSource) ListStarredBoards() ([]*models.Board, error) {
 	op.Page = "1"
 	op.PerPage = "100"
 	op.Archived = "false"
+	op.Starred = "true"
 
 	r, _, err := ds.client.StarredProjects(op)
 

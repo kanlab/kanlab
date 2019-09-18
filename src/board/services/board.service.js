@@ -108,7 +108,7 @@
                 },
                 updateCard: function(board, card) {
                     return $http.put('/api/card/' + board.project.id, this.sanitize({
-                        issue_id: card.id,
+                        issue_id: card.iid,
                         project_id: card.project_id,
                         assignee_id: card.assignee ? card.assignee.id : null,
                         milestone_id: card.milestone ? card.milestone.id : null,
@@ -123,7 +123,7 @@
                 removeCard: function(board, card) {
                     return $http.delete('/api/card/' + board.project.id, {
                         data: {
-                            issue_id: card.id,
+                            issue_id: card.iid,
                             project_id: card.project_id,
                             assignee_id: card.assignee ? card.assignee.id : null,
                             milestone_id: card.milestone ? card.milestone.id : null,
@@ -143,7 +143,7 @@
                 moveCard: function(board, card, oldStage, newStage) {
                     return $http.put('/api/card/' + board.project.id + '/move', this.sanitize({
                         project_id: card.project_id,
-                        issue_id: card.id,
+                        issue_id: card.iid,
                         assignee_id: card.assignee ? card.assignee.id : null,
                         milestone_id: card.milestone ? card.milestone.id : null,
                         title: card.title,
@@ -167,7 +167,7 @@
                         }
 
                         return $http.post('/api/card/' + board.project.id + '/move/' + project.id, this.sanitize({
-                            issue_id: card.id,
+                            issue_id: card.iid,
                             project_id: card.project_id,
                             assignee_id: card.assignee ? card.assignee.id : null,
                             milestone_id: card.milestone ? card.milestone.id : null,

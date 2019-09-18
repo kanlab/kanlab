@@ -1,15 +1,19 @@
+REGISTRY_HOST = registry.gitlab.com
 IMAGE = leanlabs/kanban
-TAG   = 1.7.1
+TAG   = 1.7.2
 CWD   = /go/src/gitlab.com/leanlabsio/kanban
+PACKAGES := `docker run --rm \
+				-v $(CURDIR):$(CWD) \
+				-w $(CWD) \
+				golang:1.8-alpine go list ./... | grep -v '/vendor/'`
 
 all: clean
 
-test:
-	@docker run -d -P --name selenium-hub selenium/hub:2.47.1
-	@docker run -d --link selenium-hub:hub selenium/node-chrome:2.47.1
-	@docker run -d --link selenium-hub:hub selenium/node-firefox:2.47.1
-	@docker run -d -P $(IMAGE):$(TAG)
-	@protractor $(CURDIR)/tests/e2e.conf.js
+test: rel/kanban_x86_64_linux
+	@docker run --rm \
+		-v $(CURDIR):$(CWD) \
+		-w $(CWD) \
+		golang:1.8-alpine go test $(PACKAGES)
 
 node_modules/: package.json
 	@docker run --rm \
@@ -54,7 +58,7 @@ rel/kanban_x86_64_linux: clean build templates/templates.go web/web.go $(find $(
 		-e GO15VENDOREXPERIMENT=1 \
 		-e CGO_ENABLED=0 \
 		--entrypoint=/usr/local/go/bin/go \
-		golang:1.5.3 build -ldflags "-X main.AppVer=$(TAG) -s" -v -o $@
+		golang:1.8.0 build -ldflags "-X main.AppVer=$(TAG) -s" -v -o $@
 
 rel/kanban_x86_64_darwin: clean build templates/templates.go web/web.go $(find $(CURDIR) -name "*.go" -type f)
 	@docker run --rm \
@@ -65,17 +69,32 @@ rel/kanban_x86_64_darwin: clean build templates/templates.go web/web.go $(find $
 		-e GO15VENDOREXPERIMENT=1 \
 		-e CGO_ENABLED=0 \
 		--entrypoint=/usr/local/go/bin/go \
-		golang:1.5.3 build -ldflags "-X main.AppVer=$(TAG) -s" -v -o $@
+		golang:1.8.0 build -ldflags "-X main.AppVer=$(TAG) -s" -v -o $@
 
-release: rel/kanban_x86_64_linux
+login:
+	@docker login -u $(REGISTRY_USERNAME) -p $(REGISTRY_PASSWORD) $(REGISTRY_HOST)
+
+release: login rel/kanban_x86_64_linux
 	@docker build -t $(IMAGE) .
 	@docker tag $(IMAGE):latest $(IMAGE):$(TAG)
 	@docker push $(IMAGE):latest
 	@docker push $(IMAGE):$(TAG)
 
 clean:
-	@rm -rf web/
-	@rm -f templates/templates.go
+	@-docker run \
+	    -v $(CURDIR):$(CWD) \
+	    -w $(CWD) \
+		alpine:3.4 rm -rf web/
+
+	@-docker run \
+		-v $(CURDIR):$(CWD) \
+    	-w $(CWD) \
+    	alpine:3.4 rm -f templates/templates.go
+
+	@-docker run \
+		-v $(CURDIR):$(CWD) \
+		-w $(CWD) \
+		alpine:3.4 rm -rf rel node_modules
 
 # Development targets
 dev_redis:
@@ -99,7 +118,7 @@ tmp/go/pkg/:
 		-w $(CWD) \
 		-e GO15VENDOREXPERIMENT=1 \
 		--entrypoint=/usr/local/go/bin/go \
-		golang:1.5.3 install -v
+		golang:1.8.0 install -v
 
 dev : DEBUG=-debug
 
@@ -119,6 +138,6 @@ dev: watch templates/templates.go web/web.go dev_redis tmp/go/pkg/
 		-e KANBAN_REDIS_ADDR=redis:6379 \
 		-e KANBAN_AUTO_COMMENTS=false \
 		--entrypoint=/usr/local/go/bin/go \
-		golang:1.5.3 run -v main.go server
+		golang:1.8.0 run -v main.go server
 
 .PHONY: help test build release

@@ -31,7 +31,7 @@
                 }).then(function(card) {
                     $scope.card = card;
 
-                    CommentService.list(card.project_id, card.id).then(function(data) {
+                    CommentService.list(card.project_id, card.iid).then(function(data) {
                         $scope.comments = data;
                     });
 
@@ -49,7 +49,7 @@
                         $scope.isSaving = true;
                         card.user_comments_count += 1;
 
-                        CommentService.create(card.project_id, card.id, $scope.commentFormData.comment).then(function(data) {
+                        CommentService.create(card.project_id, card.iid, $scope.commentFormData.comment).then(function(data) {
                             $scope.isSaving = false;
                             $scope.commentFormData = {};
                             $scope.comments.push(data);
@@ -178,7 +178,7 @@
                 };
 
                 $scope.markAsBlocked = function(card, comment) {
-                    CommentService.create(card.project_id, card.id, "Marked as **blocked**: " + comment).then(function(data) {
+                    CommentService.create(card.project_id, card.iid, "Marked as **blocked**: " + comment).then(function(data) {
                         $scope.comments.push(data);
                     });
 
@@ -191,7 +191,7 @@
                     }
 
                     var comment = 'Marked as **unblocked**';
-                    CommentService.create(card.project_id, card.id, comment).then(function(data) {
+                    CommentService.create(card.project_id, card.iid, comment).then(function(data) {
                         $scope.comments.push(data);
                     });
 
@@ -200,7 +200,7 @@
 
                 $scope.markAsReady = function (card) {
                     if (card.properties.andon === 'ready') {
-                        CommentService.create(card.project_id, card.id, "Marked as **ready** for next stage").then(function(data) {
+                        CommentService.create(card.project_id, card.iid, "Marked as **ready** for next stage").then(function(data) {
                             $scope.comments.push(data);
                         });
                     }

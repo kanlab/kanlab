@@ -45,6 +45,8 @@ type ProjectListOptions struct {
 	Archived string `url:"archived,omitempty"`
 	// Search find projects by criteria
 	Search string `url:"search,omitempty"`
+	// Starred if set to "true" return starred projects only
+	Starred string `url:"starred,omitempty"`
 
 	ListOptions
 }
@@ -52,7 +54,7 @@ type ProjectListOptions struct {
 // ListProjects gets a list of projects accessible by the authenticated user.
 //
 // GitLab API docs: http://doc.gitlab.com/ce/api/projects.html#list-projects
-func (g *GitlabContext) ListProjects(o *ProjectListOptions) ([]*Project, *CollectionOptions, error) {
+func (g *Client) ListProjects(o *ProjectListOptions) ([]*Project, *CollectionOptions, error) {
 	u, err := addOptions(getUrl([]string{"projects"}), o)
 	if err != nil {
 		return nil, nil, err
@@ -72,8 +74,8 @@ func (g *GitlabContext) ListProjects(o *ProjectListOptions) ([]*Project, *Collec
 // StarredProjects gets a list starred project for user.
 //
 // GitLab API docs: http://doc.gitlab.com/ce/api/projects.html#list-starred-projects
-func (g *GitlabContext) StarredProjects(opt *ProjectListOptions) ([]*Project, *CollectionOptions, error) {
-	u, err := addOptions(getUrl([]string{"projects/starred"}), opt)
+func (g *Client) StarredProjects(opt *ProjectListOptions) ([]*Project, *CollectionOptions, error) {
+	u, err := addOptions(getUrl([]string{"projects"}), opt)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -94,7 +96,7 @@ func (g *GitlabContext) StarredProjects(opt *ProjectListOptions) ([]*Project, *C
 //
 // GitLab API docs:
 // http://doc.gitlab.com/ce/api/projects.html#get-single-project
-func (g *GitlabContext) ItemProject(projectID string) (*Project, error) {
+func (g *Client) ItemProject(projectID string) (*Project, error) {
 	path := getUrl([]string{"projects", strings.Replace(url.QueryEscape(projectID), ".", "%2E", -1)})
 	req, _ := http.NewRequest("GET", path, nil)
 

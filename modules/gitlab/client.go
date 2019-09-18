@@ -14,7 +14,7 @@ type Config struct {
 	Oauth2   *oauth2.Config
 }
 
-type GitlabContext struct {
+type Client struct {
 	client *http.Client
 }
 
@@ -63,10 +63,10 @@ func Exchange(c string) (*oauth2.Token, error) {
 	return cfg.Oauth2.Exchange(defaultContext(), c)
 }
 
-// NewContext
-func NewContext(t *oauth2.Token, pt string) *GitlabContext {
+// NewClient creates new client for usage gitlab api
+func NewClient(t *oauth2.Token, pt string) *Client {
 	if pt != "" {
-		return &GitlabContext{
+		return &Client{
 			client: &http.Client{
 				Transport: &Transport{
 					Base: &http.Transport{
@@ -78,7 +78,7 @@ func NewContext(t *oauth2.Token, pt string) *GitlabContext {
 		}
 	}
 
-	return &GitlabContext{
+	return &Client{
 		client: cfg.Oauth2.Client(defaultContext(), t),
 	}
 }

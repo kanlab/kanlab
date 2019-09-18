@@ -7,13 +7,13 @@ import (
 )
 
 type GitLabDataSource struct {
-	client *gitlabclient.GitlabContext
+	client *gitlabclient.Client
 	db     *redis.Client
 }
 
 // New create new gitlab datasource instance
 func New(t *oauth2.Token, pt string, r *redis.Client) GitLabDataSource {
-	c := gitlabclient.NewContext(t, pt)
+	c := gitlabclient.NewClient(t, pt)
 
 	return GitLabDataSource{client: c, db: r}
 }
