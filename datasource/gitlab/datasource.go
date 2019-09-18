@@ -1,7 +1,7 @@
 package gitlab
 
 import (
-	gitlabclient "gitlab.com/leanlabsio/kanban/modules/gitlab"
+	gitlabclient "github.com/kanlab/kanlab/modules/gitlab"
 	"golang.org/x/oauth2"
 	"gopkg.in/redis.v3"
 )

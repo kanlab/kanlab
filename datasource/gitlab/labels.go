@@ -1,8 +1,8 @@
 package gitlab
 
 import (
-	"gitlab.com/leanlabsio/kanban/models"
-	"gitlab.com/leanlabsio/kanban/modules/gitlab"
+	"github.com/kanlab/kanlab/models"
+	"github.com/kanlab/kanlab/modules/gitlab"
 )
 
 // ListLabels returns list kanban labels for board
