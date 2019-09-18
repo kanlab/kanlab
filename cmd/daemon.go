@@ -6,21 +6,21 @@ import (
 
 	"github.com/go-macaron/bindata"
 	"github.com/go-macaron/binding"
-	"github.com/leanlabsio/sockets"
+	"github.com/kanlab/sockets"
 	"github.com/spf13/cobra"
-	"gitlab.com/leanlabsio/kanban/templates"
-	"gitlab.com/leanlabsio/kanban/web"
-	"gitlab.com/leanlabsio/kanban/ws"
+	"github.com/kanlab/kanlab/templates"
+	"github.com/kanlab/kanlab/web"
+	"github.com/kanlab/kanlab/ws"
 	"gopkg.in/macaron.v1"
 
-	"gitlab.com/leanlabsio/kanban/modules/auth"
-	"gitlab.com/leanlabsio/kanban/modules/setting"
+	"github.com/kanlab/kanlab/modules/auth"
+	"github.com/kanlab/kanlab/modules/setting"
 
-	"gitlab.com/leanlabsio/kanban/models"
-	"gitlab.com/leanlabsio/kanban/modules/middleware"
-	"gitlab.com/leanlabsio/kanban/routers"
-	"gitlab.com/leanlabsio/kanban/routers/board"
-	"gitlab.com/leanlabsio/kanban/routers/user"
+	"github.com/kanlab/kanlab/models"
+	"github.com/kanlab/kanlab/modules/middleware"
+	"github.com/kanlab/kanlab/routers"
+	"github.com/kanlab/kanlab/routers/board"
+	"github.com/kanlab/kanlab/routers/user"
 
 	"github.com/spf13/viper"
 )

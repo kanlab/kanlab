@@ -1,7 +1,7 @@
 package models
 
 import (
-	"gitlab.com/leanlabsio/kanban/modules/gitlab"
+	"github.com/kanlab/kanlab/modules/gitlab"
 	"golang.org/x/oauth2"
 )
 

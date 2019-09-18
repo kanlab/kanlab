@@ -2,9 +2,9 @@ package middleware
 
 import (
 	"encoding/json"
-	"gitlab.com/leanlabsio/kanban/models"
-	"gitlab.com/leanlabsio/kanban/ws"
-	"gitlab.com/leanlabsio/kanban/datasource"
+	"github.com/kanlab/kanlab/models"
+	"github.com/kanlab/kanlab/ws"
+	"github.com/kanlab/kanlab/datasource"
 	"gopkg.in/macaron.v1"
 )
 

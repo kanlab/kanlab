@@ -3,8 +3,8 @@ package board
 import (
 	"net/http"
 
-	"gitlab.com/leanlabsio/kanban/models"
-	"gitlab.com/leanlabsio/kanban/modules/middleware"
+	"github.com/kanlab/kanlab/models"
+	"github.com/kanlab/kanlab/modules/middleware"
 )
 
 // UploadFile uploads file to datasource provider

@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"gitlab.com/leanlabsio/kanban/datasource/gitlab"
-	"gitlab.com/leanlabsio/kanban/models"
+	"github.com/kanlab/kanlab/datasource/gitlab"
+	"github.com/kanlab/kanlab/models"
 	"gopkg.in/macaron.v1"
 	"gopkg.in/redis.v3"
 )

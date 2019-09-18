@@ -11,7 +11,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/spf13/viper"
-	"gitlab.com/leanlabsio/kanban/modules/gitlab"
+	"github.com/kanlab/kanlab/modules/gitlab"
 	"golang.org/x/oauth2"
 )
 

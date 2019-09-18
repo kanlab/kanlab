@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"gitlab.com/leanlabsio/kanban/models"
-	"gitlab.com/leanlabsio/kanban/modules/middleware"
+	"github.com/kanlab/kanlab/models"
+	"github.com/kanlab/kanlab/modules/middleware"
 )
 
 // ListLabels gets a list of label on board accessible by the authenticated user.

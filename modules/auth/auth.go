@@ -4,7 +4,7 @@ import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/spf13/viper"
-	"gitlab.com/leanlabsio/kanban/models"
+	"github.com/kanlab/kanlab/models"
 	"gopkg.in/macaron.v1"
 )
 
