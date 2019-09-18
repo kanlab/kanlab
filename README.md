@@ -11,9 +11,15 @@
 
 Hey there!
 
-This fork has been slightly adjusted by [@tmanick01](https://github.com/tmanick01) and me [@Leso_KN](https://github.com/leso-kn) to work with the latest version of gitlab.
+This is fork of [Leanlabs Kanban](https://github.com/leanlabsio/kanban) that includes changes from [leso-kn fork](https://github.com/leso-kn).
 
-(state: late 2018)
+If you would like to have some features or fixes in this Leanlabs Kanban fork, please add new issue and
+mention issue URL [when you sponsor that feature or fix](https://wekan.team/commercial-support/).
+
+Pull Requests are also very welcome.
+
+This fork of Leanlabs Kanban is maintained by [@xet7](https://github.com/xet7) who is maintainer of [Wekan](https://wekan.github.io)
+as part of [Wekan integration to GitLab](https://github.com/wekan/wekan/issues/2698).
 
 ### Propper way to get this working
 
