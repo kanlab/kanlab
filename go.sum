@@ -20,10 +20,8 @@ github.com/gorilla/websocket v0.0.0-20170302224613-b258b4fadb57/go.mod h1:E7qHFY
 github.com/hashicorp/hcl v0.0.0-20160426221300-9a905a34e628 h1:79lPy9LYAtihGQvcubOdkAol0FbhRAJ2BjXbiy8jDvM=
 github.com/hashicorp/hcl v0.0.0-20160426221300-9a905a34e628/go.mod h1:oZtUIOe8dh44I2q6ScRibXws4Ajl+d+nod3AaR9vL5w=
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
-github.com/kanlab/kanlab v0.0.0-20190918130001-bfb30d31ae59 h1:hRX10s007tfPHQQeWCL+3t6W9zsQLvEascuVBkPPpOs=
-github.com/kanlab/kanlab v0.0.0-20190918130001-bfb30d31ae59/go.mod h1:br2ZRqbdKwfVayl5ZolV2aKaHUGL+iYN2IACYNhLQLs=
-github.com/kanlab/kanlab/sockets v0.0.0-20151203105927-555ea7145f56 h1:n3rsfRVnzwAlxfS5r6ufN91zqBupGUx9Pp9KKTBK7YM=
-github.com/kanlab/kanlab/sockets v0.0.0-20151203105927-555ea7145f56/go.mod h1:Sh9zm0j3H6IUKN3RKnMGh8zkTr28p5AN96kfYFkztuc=
+github.com/kanlab/sockets v0.0.0-20151203105927-555ea7145f56 h1:Tm/VzzW4uym47hw2NyfBYyzkTtX0TQLhq+SoOHdijTU=
+github.com/kanlab/sockets v0.0.0-20151203105927-555ea7145f56/go.mod h1:Nz00gec8SGiDOVDNVfgPPKszJh1TyS0c1wjmq8W9eY0=
 github.com/magiconair/properties v1.7.0 h1:8Oygzd+nhiSWfp2XOwattyfEt36Q/F/99zQJy4axKdg=
 github.com/magiconair/properties v1.7.0/go.mod h1:PppfXfuXeibc/6YijjN8zIbojt8czPbwD3XqdrwzmxQ=
 github.com/mitchellh/mapstructure v0.0.0-20160212031839-d2dd02622084 h1:Z2EJ6SUYrzx6J/YH/ltZthkUQTB/5+Ykpkew6y9DGJE=
@@ -46,6 +44,8 @@ github.com/spf13/pflag v0.0.0-20170130214245-9ff6c6923cff/go.mod h1:DYY7MBk1bdzu
 github.com/spf13/viper v0.0.0-20170217163817-7538d73b4eb9 h1:rtmHchHXFTzHW1ZAnHziYWaTRa37ZzjjcU7xI/t21hk=
 github.com/spf13/viper v0.0.0-20170217163817-7538d73b4eb9/go.mod h1:A8kyI5cUJhb8N+3pkfONlcEcZbueH6nhAm0Fq7SrnBM=
 github.com/stretchr/testify v0.0.0-20160524234229-8d64eb7173c7/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=
+gitlab.com/leanlabsio/kanban v0.0.0-20190411094350-7f21696fb9d0 h1:3o9yjsgla2iLuFrswLCuAtrXchgbYp1gy3hoU4+r8MY=
+gitlab.com/leanlabsio/kanban v0.0.0-20190411094350-7f21696fb9d0/go.mod h1:Pe5nxC81Kv43kpI38CLBpOc14mL6dvC77g4rpYFHydc=
 golang.org/x/crypto v0.0.0-20170302193244-40541ccb1c6e h1:NapT3cc9O94dSeZp9kkJglkai4KKAY7ff9PcOi6J1ss=
 golang.org/x/crypto v0.0.0-20170302193244-40541ccb1c6e/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
 golang.org/x/net v0.0.0-20170114055629-f2499483f923 h1:cLl2p2++IYXqH4YzQ7uIc7QLOa4SU0x1vSy9Da++V94=

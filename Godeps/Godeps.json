@@ -91,10 +91,6 @@
 			"Rev": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
 		},
 		{
-			"ImportPath": "github.com/kanlab/kanlab/sockets",
-			"Rev": "555ea7145f564a420c51194bb8b91eef028c7437"
-		},
-		{
 			"ImportPath": "github.com/magiconair/properties",
 			"Comment": "v1.7.0",
 			"Rev": "c265cfa48dda6474e208715ca93e987829f572f8"

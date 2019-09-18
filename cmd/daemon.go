@@ -8,8 +8,6 @@ import (
 	"github.com/go-macaron/binding"
 	"github.com/kanlab/sockets"
 	"github.com/spf13/cobra"
-	"github.com/kanlab/kanlab/templates"
-	"github.com/kanlab/kanlab/web"
 	"github.com/kanlab/kanlab/ws"
 	"gopkg.in/macaron.v1"
 
