@@ -1,6 +1,6 @@
 package datasource
 
-import "gitlab.com/leanlabsio/kanban/models"
+import "github.com/kanlab/kanlab/models"
 
 type DataSource interface {
 	CardSource

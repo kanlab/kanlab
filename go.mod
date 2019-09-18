@@ -1,4 +1,4 @@
-module gitlab.com/leanlabsio/kanban
+module github.com/kablab/kanlab
 
 go 1.12
 
@@ -16,7 +16,7 @@ require (
 	github.com/hashicorp/hcl v0.0.0-20160426221300-9a905a34e628
 	github.com/inconshreveable/mousetrap v1.0.0
 	github.com/kanlab/kanlab v0.0.0-20190918130001-bfb30d31ae59
-	github.com/leanlabsio/sockets v0.0.0-20151203105927-555ea7145f56
+	github.com/kanlab/kanlab/sockets v0.0.0-20151203105927-555ea7145f56
 	github.com/magiconair/properties v1.7.0
 	github.com/mitchellh/mapstructure v0.0.0-20160212031839-d2dd02622084
 	github.com/pelletier/go-buffruneio v0.2.0

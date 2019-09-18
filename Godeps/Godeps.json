@@ -1,5 +1,5 @@
 {
-	"ImportPath": "gitlab.com/leanlabsio/kanban",
+	"ImportPath": "github.com/kanlab/kanlab",
 	"GoVersion": "go1.8",
 	"GodepVersion": "v79",
 	"Packages": [
@@ -91,7 +91,7 @@
 			"Rev": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
 		},
 		{
-			"ImportPath": "github.com/leanlabsio/sockets",
+			"ImportPath": "github.com/kanlab/kanlab/sockets",
 			"Rev": "555ea7145f564a420c51194bb8b91eef028c7437"
 		},
 		{
