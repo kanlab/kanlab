@@ -28,7 +28,6 @@ require (
 	github.com/spf13/pflag v0.0.0-20170130214245-9ff6c6923cff
 	github.com/spf13/viper v0.0.0-20170217163817-7538d73b4eb9
 	github.com/stretchr/testify v0.0.0-20160524234229-8d64eb7173c7
-	gitlab.com/leanlabsio/kanban v0.0.0-20190411094350-7f21696fb9d0
 	golang.org/x/crypto v0.0.0-20170302193244-40541ccb1c6e
 	golang.org/x/net v0.0.0-20170114055629-f2499483f923
 	golang.org/x/oauth2 v0.0.0-20150902214911-ad0128250e8f

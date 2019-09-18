@@ -44,8 +44,6 @@ github.com/spf13/pflag v0.0.0-20170130214245-9ff6c6923cff/go.mod h1:DYY7MBk1bdzu
 github.com/spf13/viper v0.0.0-20170217163817-7538d73b4eb9 h1:rtmHchHXFTzHW1ZAnHziYWaTRa37ZzjjcU7xI/t21hk=
 github.com/spf13/viper v0.0.0-20170217163817-7538d73b4eb9/go.mod h1:A8kyI5cUJhb8N+3pkfONlcEcZbueH6nhAm0Fq7SrnBM=
 github.com/stretchr/testify v0.0.0-20160524234229-8d64eb7173c7/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=
-gitlab.com/leanlabsio/kanban v0.0.0-20190411094350-7f21696fb9d0 h1:3o9yjsgla2iLuFrswLCuAtrXchgbYp1gy3hoU4+r8MY=
-gitlab.com/leanlabsio/kanban v0.0.0-20190411094350-7f21696fb9d0/go.mod h1:Pe5nxC81Kv43kpI38CLBpOc14mL6dvC77g4rpYFHydc=
 golang.org/x/crypto v0.0.0-20170302193244-40541ccb1c6e h1:NapT3cc9O94dSeZp9kkJglkai4KKAY7ff9PcOi6J1ss=
 golang.org/x/crypto v0.0.0-20170302193244-40541ccb1c6e/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
 golang.org/x/net v0.0.0-20170114055629-f2499483f923 h1:cLl2p2++IYXqH4YzQ7uIc7QLOa4SU0x1vSy9Da++V94=
